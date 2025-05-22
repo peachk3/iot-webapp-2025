@@ -1,0 +1,7 @@
+h1{
+    color : lightblue;
+    background-color: #000; /*rgb(0, 0, 0); 와 동일*/;
+}
+p{
+    color : deepskyblue;
+}
