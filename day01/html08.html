@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS 예제</title>
     <!-- CSS 설정 -->
     <style>
-        * { /* 웹 페이지 내 모든 요소 ALL의 의미 */
-            /* font-size: 10px; */
+        * { /* 웹페이지내 모든 요소. All의 의미 */
+            /* font-size: 10px;  */
             margin: 0px;
         }
         body, p, h1, h2, h3, h4, h5, h6 {
-            /* 여러 개 태그를 사용 가능 */
-            color: burlywood;
+            /* 여러개 태그를 사용가능 */
+            color: aqua;
         }
         h1 {
-            color: crimson;
+            color: crimson;            
         }
         div {
             padding: 0px;
         }
         #header { /* 아이디 속성은 # */
-            background-color: beige;
+            background-color: antiquewhite;  
             width: 700px;
-            margin: 0 auto; /* auto는 정중앙에 위치시킴 */
+            margin: 0 auto; /* auto는 정중아에 위치시킴*/
         }
         #nav {
             background-color: azure;
@@ -32,7 +33,7 @@
         }
         #container {
             background-color: beige;
-            width: 700;
+            width: 700px;
             margin: 0 auto;
         }
         .temp { /* 클래스 속성은 . */
@@ -45,21 +46,32 @@
         }
         #contents {
             font-size: 20px;
-            background-color: darkolivegreen;
+            background-color: burlywood;
             width: 500px;
-            float: left;
+            float: left;            
         }
         #footer {
             background-color: blueviolet;
             width: 700px;
+            height: 100%; /* 높이의 %는 적용이 안 됨 */
             margin: 0 auto;
+        }
+        #nav ul{
+            overflow: hidden;
+        }
+        #nav li{
+            list-style: none;
+            float:left; 
+            padding-left: 10px; 
+            padding-right:10px;
         }
     </style>
 </head>
+
 <body>
     <div id="header">
         <!-- 로고 영역 -->
-        <h1>로고 영역</h1>
+        <h1>로고영역</h1>
     </div>
     <div id="nav" class="temp">
         <!-- 네비게이션 영역 -->
@@ -83,8 +95,9 @@
         </div>
     </div>
     <div id="footer">
-        <!-- 푸터 영역 --> 
+        <!-- 푸터 영역 -->
         <h3>footer</h3>
     </div>
 </body>
+
 </html>
