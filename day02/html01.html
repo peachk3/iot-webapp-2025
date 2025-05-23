@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 계속</title>
+    <style>
+        /* 클래스 선택자 */
+        .select{
+            color: olivedrab;
+        }
+        .item{
+            color: olive;
+        }
+        .focus{
+            background-color:lightgreen;
+        }
+        /* 태그 선택자 중 속성 선택자 */
+        input[type="text"]{
+            background-color: yellowgreen
+        }
+        input[type="password"]{
+            background-color: aqua;
+        }
+        #section .title{
+            color: forestgreen;
+        }
+        #section > p{
+            color: darkgreen;
+        }
+        /* 반응, 상태 선택자 */
+        input:focus{
+            background-color: blueviolet;
+        }
+        input:disabled{
+            background-color: gainsboro;
+        }
+        #menu {
+            overflow: hidden;
+        }
+        #menu li {
+            list-style: none;
+            float: left;
+            /* WPF l, t, r, b
+            CSS t, r, b, l
+            */
+            padding: 10px 5px 15px 20px;
+        }
+        /* 구조 선택자 */
+        #menu li:nth-child(2n) {
+            background-color: seagreen;
+        } 
+        #menu li:nth-child(2n+1) {
+            background-color: green;
+        }
+        #menu li:first-child{
+            border-radius: 10px 0 0 10px;
+        }
+        #menu li:last-child{
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="select">사과</li>
+        <li class="item focus">바나나</li>
+        <li>망고</li>
+        <li class="select">복숭아</li>
+    </ul><br>
+    <form>
+        <input type="text" value="peach"><br>
+        <input type="password" value="12345" disabled><br>
+        <input type="submit">
+    </form>
+
+    <div id="section">
+        <h2 class="title">Lorem ipsum</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <ul id="menu">
+        <li>네이버</li>
+        <li>다음</li>
+        <li>구글</li>
+        <li>야후</li>
+        <li>트위터</li>
+    </ul>
+</body>
+</html>
