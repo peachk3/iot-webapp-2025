@@ -343,7 +343,7 @@
 - HTML5 + CSS3 + JS + BootStrap 응용예제
     - Bootstrap Image Gallery
 
-
+    https://github.com/user-attachments/assets/c66b92d9-60fb-4d37-a7a4-67646faf1ef4
 
 ## 4일차
 
