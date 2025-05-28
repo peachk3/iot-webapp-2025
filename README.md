@@ -353,7 +353,7 @@
 - Modern Business 템플릿 클로닝
     - https://startbootstrap.com/template/modern-business 
 
-    <img src="./image/web0006.png" width="700">
+    <img src="./image/web006.png" width="700">
 
     - 압축파일 다운로드 후 압축해제
 
@@ -530,7 +530,6 @@
 
 <img src="./image/web012.png" width="650">
 
-
 - MVVM과 MVC 패턴의 구조에 대해 설명할 수 있어야 함
 - 현재 기본적인 웹개발의 표준. Java도 Spring Boot MVC
 - 프론트엔드가 심각한 스파게티 코드였으면 현재는 최소화하고 있음
@@ -541,7 +540,6 @@
     - 현대적인 방법 : EntityFramework 방식. 쿼리를 사용하지 않음
         - DB First : DB를 설계해 놓고, 연결, 사용하는 방식
         - Code First : 모델 클래스만 만들어 놓고, EF가 DB에 테이블을 자동 생성
-
 
 #### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝
 1. Kelly-1.0.0.zip 다운로드
