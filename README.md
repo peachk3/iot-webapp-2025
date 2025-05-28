@@ -384,3 +384,4 @@
 9. Bootstrap Example의 테마 적용
 10. 전체화면
 
+    https://github.com/user-attachments/assets/0fb7096e-9c2e-4382-bf4f-62e18cf246c3
