@@ -623,6 +623,7 @@
 
 9. 작업화면
 
+    https://github.com/user-attachments/assets/23d55b45-382a-409d-964f-95cb76742a08
 
 
 ## 6일차
