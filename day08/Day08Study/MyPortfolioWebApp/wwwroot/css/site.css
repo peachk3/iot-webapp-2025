@@ -1378,7 +1378,7 @@ section,
     text-align: center;
 }
 
-board-table > :not(caption) > * > td{
+.board-table > :not(caption) > * > * {
     padding: 0.5rem 0.5rem;
 }
 

@@ -4,14 +4,21 @@
 @*     ViewData["Title"] = "Index"; *@
 @* } *@
 
+@{
+    // 컨트롤러 변수값이 바로 사용할 수 없음
+    // ViewBag, ViewData, TempData로 전달
+    var startPage = ViewBag.StartPage; // 시작 페이지
+    var endPage = ViewBag.EndPage; // 끝 페이지
+    var page = ViewBag.Page; // 현재 페이지
+    var totalPAge = ViewBag.TotalPage;
+}
+
+<partial name="_Notification" />
+
 <section id="news" class="news section">
     <div class="container section-title" data-aos="fade-up">
         <h2>News</h2>
         <p>Loarem ipsum dalat sit amet.</p>
-        @if (TempData["success"] != null)
-        {
-            <h3 style="color:greenyellow">@TempData["success"]</h3>
-        }
     </div>
     <div class="container" data-aos="fade-up" data-aos-delay="100">
         <p>
@@ -41,29 +48,46 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model) {
-                <tr>
-                    <td class="content-center">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td class="content-center">
-                        @Html.DisplayFor(modelItem => item.Writer)
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
-                    </td>
-                    @* <td> *@
-                    @*     @Html.DisplayFor(modelItem => item.Description) *@
-                    @* </td> *@
+                @foreach (var item in Model) {
+                    <tr>
                         <td class="content-center">
-                        @Html.DisplayFor(modelItem => item.PostDate)
-                    </td>
-                    <td class="content-center">
-                        @Html.DisplayFor(modelItem => item.ReadCount)
-                    </td>
-                </tr>
-            }
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="content-center">
+                            @Html.DisplayFor(modelItem => item.Writer)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
+                        </td>
+                        @* <td> *@
+                        @*     @Html.DisplayFor(modelItem => item.Description) *@
+                        @* </td> *@
+                        <td class="content-center">
+                            @Html.DisplayFor(modelItem => item.PostDate)
+                        </td>
+                        <td class="content-center">
+                            @Html.DisplayFor(modelItem => item.ReadCount)
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
+        <div class="out">
+            <div class="in">
+                <div>
+                    @for (var pcount = startPage; pcount <= endPage; pcount++)
+                    {
+                        if (pcount == page)
+                        {
+                            <a href="?page=@pcount" class="btn active">@pcount</a>
+                        }
+                        else
+                        {
+                            <a href="?page=@pcount" class="btn">@pcount</a>
+                        }  
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </section>

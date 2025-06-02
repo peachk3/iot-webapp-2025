@@ -185,7 +185,8 @@
         });
 
     });
-
+    // trumbowyg editor 활성화
+    $('.editor').trumbowyg();
 
 })();
 function setMenu(param) {
