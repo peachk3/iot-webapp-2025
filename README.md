@@ -552,7 +552,7 @@
 
     <img src="./image/web013.png" width="600">
 
-## 5일차
+## 6일차
 
 ### ASP.NET Core
 
@@ -627,7 +627,7 @@
     https://github.com/user-attachments/assets/23d55b45-382a-409d-964f-95cb76742a08
 
 
-## 6일차
+## 7일차
 
 ### ASP.NET Core
 
@@ -677,7 +677,59 @@
 
     <img src="./image/web017.png" width="600">
 
-#### ASP.NEt Core MVC - Kelly Portfolio 디자인 클로닝
+12. 자동으로 만들 경우의 문제점
+    - Model의 관계 부분에서 부모로의 연결이 Not Null로 연결됨. CUD 작업 불가
+    - EF Core의 탐색 속성(Navigation Property)
+    - = null!로 정의되어 있어서 EF Core는 내부적으로 필수(NOT NULL) 관계라고 간주
+    - public virtual Divtbl DivisionNavigation { get; set; } **= null!**; 
+    - public virtual Divtbl? DivisionNavigation { get; set; } 로 변경
+
+    - HACK : 자동 생성 후 수정 주석부분 확인 | BookController, Model, View 확인할 것
+
+    <img src="./image/web9998.png" width="600">
+
+13. WebEditor 클라이언트 라이브러리 Trumbowyg 설치
+    - 클라이언트 라이브러리 추가
+
+    <img src="./image/web9997.png" width="600">
+
+14. Markdown Viewer
+    - NuGet 패키지 관리자, Westwind.AspNetCore.Markdown 설치
+
+15. 메일관련
+    - [소스확인](./ref/Day07Study/MyPortfolioWebApp/Controllers/HomeController.cs)
+
+16. 메뉴 활성화
+    - _Layout.cshtml 내에 작성
+
+    ```cs
+    // cshtml 상단.
+    @using Microsoft.AspNetCore.Mvc.Rendering
+    @inject Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper Html
+
+    @functions {
+        bool IsActive(string controller, string action)
+        {
+            var routeData = ViewContext.RouteData;
+            var currentAction = routeData.Values["action"]?.ToString();
+            var currentController = routeData.Values["controller"]?.ToString();
+
+            return string.Equals(controller, currentController, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(action, currentAction, StringComparison.OrdinalIgnoreCase);
+        }
+
+        string ActiveClass(string controller, string action) =>
+            IsActive(controller, action) ? "active" : "";
+    }
+    ```
+
+    ```html
+    <li><a asp-controller="Home" asp-action="Index" class="@ActiveClass("Home", "Index")">Home</a></li>
+    ```
+
+
+## 8일차
+#### ASP.NET Core MVC - Kelly Portfolio 디자인 클로닝(계속)
 - 뉴스, 게시판 완료
 - 한글화
 - 마무리

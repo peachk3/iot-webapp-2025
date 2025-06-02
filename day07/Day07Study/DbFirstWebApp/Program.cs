@@ -11,13 +11,11 @@ namespace DbFirstWebApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            // DB 연결 초기화
+            // DB연결 초기화
             builder.Services.AddDbContext<BookrentalshopContext>(options => options.UseMySql(
                 builder.Configuration.GetConnectionString("DefaultConnection"),
                 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
             ));
-
 
             var app = builder.Build();
 
