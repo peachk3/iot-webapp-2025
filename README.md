@@ -931,8 +931,6 @@
     - HomeController Contact() Post메서드 신규 추가
     - 메일 관련 작업 - Pendding
 
-### 자유게시판 
-
 ## 11일차
 
 ### ASP.NET Core API 서버(RestAPI)
@@ -1027,3 +1025,27 @@
 #### WebAPI 서버 + 웹사이트 + 윈앱
 
 ### AWS 클라우드 업로드
+
+
+## 코딩테스트(대체 과제)
+
+### 자유게시판 완성
+- 목록
+    - 검색
+    - 페이지네이션
+    <img src="./image/web999.png" width="600">
+- 게시글 작성
+    - 이메일, 작성자, 제목, 내용 필수 입력
+    <img src="./image/web998.png" width="600">
+- 게시글 상세보기
+    - 수정, 삭제, 목록 버튼 활성화
+    <img src="./image/web997.png" width="600">
+- 게시글 수정
+    - 이메일, 작성자 수정 불가
+    <img src="./image/web996.png" width="600">
+- 게시글 삭제
+    - 재확인 후 삭제
+    <img src="./image/web995.png" width="600">
+- 검색
+    - 검색어에 해당하는 제목 출력
+    <img src="./image/web994.png" width="600">

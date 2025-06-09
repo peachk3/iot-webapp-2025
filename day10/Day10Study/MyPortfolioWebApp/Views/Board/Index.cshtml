@@ -1,13 +1,20 @@
 ﻿@model IEnumerable<MyPortfolioWebApp.Models.Board>
 
 @{
-    ViewData["Title"] = "Index";
+    // 컨트롤러 변수값이 바로 사용할 수 없음
+    // ViewBag, ViewData, TempData로 전달
+    var startPage = ViewBag.StartPage; // 시작 페이지
+    var endPage = ViewBag.EndPage; // 끝 페이지
+    var page = ViewBag.Page; // 현재 페이지
+    var totalPage = ViewBag.TotalPage;
+    // 검색어도 컨트롤러에서 넘겨옴
     var search = ViewBag.Search; // 검색어
 }
+
 <section id="board" class="board section">
     <div class="container section-title" data-aos="fade-up">
         <h2>자유게시판</h2>
-        <p></p>
+        <p>자유롭게 이용하실 수 있습니다</p>
     </div>
     <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row justify-content-between mb-2">
@@ -27,13 +34,16 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Email)
+                        @Html.DisplayNameFor(model => model.Id)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Writer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
                     </th>
                     @* <th> *@
                     @*     @Html.DisplayNameFor(model => model.Contents) *@
@@ -51,7 +61,7 @@
                 {
                     <tr>
                         <td class="content-center">
-                            @Html.DisplayFor(modelItem => item.Email)
+                            @Html.DisplayFor(modelItem => item.Id)
                         </td>
                         <td class="content-center">
                             <a asp-action="Details" asp-route-id="@item.Id">
@@ -60,6 +70,9 @@
                         </td>
                         <td class="content-center">
                             @Html.DisplayFor(modelItem => item.Writer)
+                        </td>
+                        <td class="content-center">
+                            @Html.DisplayFor(modelItem => item.Email)
                         </td>
                         @* <td class="content-center"> *@
                         @*     @Html.DisplayFor(modelItem => item.Contents) *@
@@ -74,5 +87,38 @@
                 }
             </tbody>
         </table>
+        <div class="text-center mt-3">
+            <div class="in">
+                <ul class="pagination pagination-sm justify-content-center">
+                    @if (page > 1) // 첫 페이지 버튼
+                    {
+                        <li class="page-item"><a href="?page=1&search=@search" class="page-link">≪</a></li>
+                    }
+                    @if (page > 1) // 이전 페이지 버튼
+                    {
+                        <li class="page-item"><a href="?page=@(page-1)&search=@search" class="page-link">＜</a></li>
+                    }
+                    @for (var pcount = startPage; pcount <= endPage; pcount++)
+                    {
+                        if (pcount == page)
+                        {
+                            <li class="page-item"><a href="?page=@pcount&search=@search" class="page-link active">@pcount</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a href="?page=@pcount&search=@search" class="page-link">@pcount</a></li>
+                        }
+                    }
+                    @if (page < totalPage)
+                    {
+                        <li class="page-item"><a href="?page=@(page + 1)&search=@search" class="page-link">＞</a></li>
+                    }
+                    @if (page != totalPage) // 마지막 페이지
+                    {
+                        <li class="page-item"><a href="?page=@totalPage&search=@search" class="page-link">≫</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
     </div>
 </section>

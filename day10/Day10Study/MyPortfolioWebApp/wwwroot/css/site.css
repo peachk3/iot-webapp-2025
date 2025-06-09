@@ -1428,3 +1428,25 @@ section,
     .link-kelly i:hover {
         color: #34B5A5;
     }
+
+
+.page-link {
+    background-color: #67C5B9 !important;
+    border-color: white !important;
+    border-radius: 6px;
+    color : darkcyan;
+}
+
+    .page-link:hover {
+        background-color: darkcyan !important;
+        border-color: darkcyan !important;
+        color: white;
+        text-decoration: none;
+    }
+
+.page-item.active .page-link {
+    background-color: aquamarine;
+    color: white;
+    border-color: #007bff;
+    font-weight: bold;
+}
