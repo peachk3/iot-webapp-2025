@@ -1,9 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using WpfTodoListApp.Models;
 
 namespace WpfTodoListApp
