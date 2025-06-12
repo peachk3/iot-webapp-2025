@@ -1088,10 +1088,69 @@
 ### ASP.NET Core API서버(계속)
 
 #### WebAPI 서버 + 웹사이트(계속)
-- 할 일 삭제
+- 할 일 수정/삭제
+- 실행화면
+
+    <img src="./image/web034.png" widtd="600">
+
+- 결론
+    - WebAPI로 백엔드를 운영하면 프론트는 모두 사용 (윈앱, 웹앱, 모바일앱)
 
 ### AWS 클라우드 업로드
-- AWS 라이트세일로 웹사이트 업로드
+- 클라우드 서비스 사용 : 어디서나 웹사이트 공개
+- 온프레미스 : 직접 서버를 구축, DB서버 구축, 웹서버구축 등 직접
+    - 서버 하드웨어 구매, 서비실 구축, UPS구성, 네트워크 스위치 구성
+    - OS 구매, SW 구매, 운영환경 구성, 개발환경 구성
+    - 운영하면서 발생하는 문제 해결, 유지보수
+- 클라우드 : 서버 구축 필요 없음. DB 서버 신청 생성
+    - 서버실 구축 X, 하드웨어 구매 X, SW 구매 X, 운영문제 관리 X
+    - 최초 구축 비용 X 
+    - 사용료 저렴하지 않음
+
+- AWS 라이트세일로 - 
+    - 기존 AWS보다 저렴하게 사용할 수 있는 서비스
+
+#### AWS 라이트세일에 웹서버 올리기
+1. 인스턴스 생성
+    1. Microsoft Windows > Windows Server 2019 >
+    2. 네트워크 듀얼스택
+    3. 크기, 월별 $9.5 선택 `90일 무료`
+    4. 인스턴스 이름
+    5. 인스턴스 생성
+2. 인스턴스 관리 > RDP를 사용하여 연결
+    1. 초기화 대기(네트워크 나올때까지, 1분 가량)
+    2. Network2 허용 (yes 클릭)
+    3. Server Manager 오픈
+        - Configure this local server
+        - IE Enhanced Security Config : ON(웹사이트 오픈 불가) -> OFF
+3. 필요 SW 다운로드
+    1. MySQL Installer for Windows
+    2. Chrome broswer(option)
+    3. FileZilla FTP Server
+
+4. MySQL 설치
+    1. Custom 선택
+    2. MySQL Server 8.0.34 - x64만 선택, 설치 후 Next
+    3. 일반적으로 Next
+    4. Authentication Method > Use Legacy Authecntication (Retain, MySQL 5.x Compatibility) 선택
+        - 암호 정책이 간결
+        - 대신 AWS는 IP나 공개된 상황이라 간단한 암호 설정시 절대 안됨
+    5. 나머지는 Next, Execute 실행
+    6. 마지막에 Finish 클릭
+    7. Firewall & Network Protection 실행 > Advanced setting 선택
+        - Inbound Rules > Port 3306 확인, 없으면 생성
+    8. 라이트세일 인스턴스 관리 > 네트워크
+        - IPv4 방화벽에 규칙 추가
+
+
+
+6. Visual Studio 프로젝트 오픈(MyPortfolioWebApp)
+    1. 게시 > FTP/FTPS 선택
+    2. 서버 - ftps://aws-public-ip
+    3. 사이트 경로 /
+    4. 수동모드 - 체크
+    5. 
+
 
 ### 부가적인 기능
 - OAuth(구글 로그인)
