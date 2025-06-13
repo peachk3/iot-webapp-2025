@@ -1091,7 +1091,7 @@
 - 할일 수정/삭제
 - 실행화면
 
-    <img src="./image/web0034.png" width="600">
+    <img src="./image/web034.png" width="600">
 
 - 결론
     - WebAPI로 백엔드를 운영하면 프론트는 모두 사용가능(윈앱, 웹앱, 모바일앱)
