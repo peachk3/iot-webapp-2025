@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolioWebApp.Models;
+using System.Diagnostics;
 
 namespace MyPortfolioWebApp.Controllers
 {
@@ -42,14 +43,14 @@ namespace MyPortfolioWebApp.Controllers
 
             // 마지막 페이지 구하기
             var countPage = 10; // 페이지를 표시할 최대 페이지 개수, 10개 
-            var startPage = ((page - 1) / countPage) * countPage +1 ;
+            var startPage = ((page - 1) / countPage) * countPage + 1;
             var endPage = startPage + countPage - 1;
-            if (totalPage < endPage) endPage = totalPage; 
+            if (totalPage < endPage) endPage = totalPage;
             // 나타낼 페이지 수가 10이 안 되면 페이지 수 조정
             // 마지막 페이지까지 글이 12개이면 1, 2 패지키만 표시
-            
+
             // 저장 프로시저에 보낼 rowNum값, 시작번호랑 끝번호
-            var startCount = ((page - 1) * countPage) +1; // 2페이지의 경우 11
+            var startCount = ((page - 1) * countPage) + 1; // 2페이지의 경우 11
             var endCount = startCount + countList - 1; // 2페이지의 경우 20
 
             // View로 넘기는 데이터, 페이징 숫자 컨트롤 사용
@@ -105,10 +106,45 @@ namespace MyPortfolioWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description")] News news)
+        // News 모델에 저장하는 것은 파일 경로
+        // IFormFile? UploadFile에는 파일 자체 바이너리 데이터
+        public async Task<IActionResult> Create([Bind("Id,Title,Description")] News news, IFormFile? UploadFile)
         {
+            const long MaxFileSize = 10 * 1024 * 1024;
+            
+
             if (ModelState.IsValid)
             {
+                // 파일이 존재하면 
+                if (UploadFile != null && UploadFile.Length > 0)
+                {
+                    // 서버에 파일 저장, 모델에 파일 경로 저장
+                    Debug.WriteLine(UploadFile.Length);
+
+                    if (UploadFile.Length > MaxFileSize)
+                    {
+                        ModelState.AddModelError("UploadFile", "파일크기는 10MB 이하로 제한합니다.");
+                        return View(news);
+                    }
+
+                    string upFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "upload");
+                    Directory.CreateDirectory(upFolder); // 폴더가 없으면 생성
+
+                    // example.jpg 파일이 여러 번 올라가면 파일이 겹쳐짐
+                    // 파일명 변경
+                    // Guid.NewGuid() = 랜덤 아이디 생성
+                    // Path.GetExtension() = 파일의 확장자만 가져옴 .jpg
+                    string newFileName = Guid.NewGuid() + Path.GetExtension(UploadFile.FileName); // 123112-12312-1231.jpg
+                    string filePath = Path.Combine(upFolder, newFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await UploadFile.CopyToAsync(stream); // 파일 저장
+                    }
+
+                    // 모델에 파일명 할당
+                    news.UploadFile = newFileName;
+                }
                 news.Writer = "관리자"; // 작성자는 자동으로 관리자
                 news.PostDate = DateTime.Now; // 게시일자는 현재
                 news.ReadCount = 0;
@@ -146,7 +182,7 @@ namespace MyPortfolioWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] News news)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] News news, IFormFile? NewFile)
         {
             if (id != news.Id)
             {
@@ -165,7 +201,33 @@ namespace MyPortfolioWebApp.Controllers
                     }
 
                     existingNews.Title = news.Title;
-                    existingNews.Description = news.Description;  
+                    existingNews.Description = news.Description;
+
+                    //파일이 변경되었으면
+                    //만약 파일이 변경되었으면
+                    if (NewFile != null && NewFile.Length > 0)
+                    {
+
+                        //서버에 파일저장, 모델에 파일경로 저장
+                        Debug.WriteLine(NewFile.Length); // 파일크기 확인
+                        string upFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "upload");
+                        Directory.CreateDirectory(upFolder); // 폴더가 없으면 생성
+
+                        // example.jpg 파일이 여러번 올라가면 파일이 겹쳐짐 
+                        // 파일명을 변경
+                        // Guid.NewGuid()는 고유한 식별자를(랜덤 아이디) 생성
+                        // Path.GetExtension() // 파일의 확장자 추출
+                        string newFileName = Guid.NewGuid() + Path.GetExtension(NewFile.FileName); //21213-21312-123-1-2111.png 파일명이 만들어짐
+                        string filePath = Path.Combine(upFolder, newFileName); // wwwroot/upload/21213-21312-123-1-2111.png
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await NewFile.CopyToAsync(stream); // 파일을 서버에 저장
+                        }
+                        //모델에 파일명 할당
+                        existingNews.UploadFile = newFileName; // UploadFile은 파일명만 저장됨
+                    }
+
 
                     // UPDATE News SET ...
                     //_context.Update(news); // 방식 1 - ID가 같은 새 글을 update하면 수정

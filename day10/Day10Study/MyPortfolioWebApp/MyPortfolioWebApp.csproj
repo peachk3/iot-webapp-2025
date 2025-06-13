@@ -10,6 +10,7 @@
     <Folder Include="BackupModels\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\upload\" />
   </ItemGroup>
 
   <ItemGroup>
